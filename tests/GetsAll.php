@@ -9,7 +9,6 @@
 namespace xltxlm\hbase\tests;
 
 use Hbase\HbaseClient;
-use kuaigeng\review\Config\Hbase;
 use PHPUnit\Framework\TestCase;
 use Thrift\Protocol\TBinaryProtocol;
 use Thrift\Transport\TBufferedTransport;
