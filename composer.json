@@ -1,6 +1,6 @@
 {
-  "name": "xltxlm/Hbase",
-  "description": "Hbase操作类库",
+  "name": "xltxlm/hbase",
+  "description": "hbase操作类库",
   "authors": [
     {
       "name": "xltxlm",
@@ -12,14 +12,14 @@
   },
   "autoload": {
     "psr-4": {
-      "xltxlm\\Hbase\\": [
+      "xltxlm\\hbase\\": [
         "src/"
       ]
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "xltxlm\\Hbase\\": [
+      "xltxlm\\hbase\\": [
         "./"
       ]
     }
