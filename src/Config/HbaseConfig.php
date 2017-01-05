@@ -8,10 +8,16 @@
 
 namespace xltxlm\hbase\Config;
 
+use Hbase\HbaseClient;
+use Thrift\Protocol\TBinaryProtocol;
+use Thrift\Transport\TBufferedTransport;
+use Thrift\Transport\TSocket;
+use xltxlm\config\TestConfig;
+
 include_once __DIR__.'/../Libs/Hbase.php';
 include_once __DIR__.'/../Libs/Types.php';
 
-abstract class HbaseConfig
+abstract class HbaseConfig implements TestConfig
 {
     /** @var string 主机ip地址 */
     protected $host = '';
@@ -56,5 +62,22 @@ abstract class HbaseConfig
         $this->port = $port;
 
         return $this;
+    }
+
+    public function test()
+    {
+        $socket = new TSocket($this->getHost(), $this->getPort());
+
+        $socket->setSendTimeout(10000); // Ten seconds (too long for production, but this is just a demo ;)
+        $socket->setRecvTimeout(20000); // Twenty seconds
+        $transport = new TBufferedTransport($socket);
+        $protocol = new TBinaryProtocol($transport);
+        $client = new HbaseClient($protocol);
+        $transport->open();
+        $tables = $client->getTableNames();
+        if (empty($tables)) {
+            throw new \Exception('Hbase服务错误，链接不上'.$this->getHost().':'.$this->getPort());
+        }
+        return $tables;
     }
 }

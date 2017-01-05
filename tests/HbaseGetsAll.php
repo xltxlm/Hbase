@@ -14,8 +14,9 @@ use Thrift\Protocol\TBinaryProtocol;
 use Thrift\Transport\TBufferedTransport;
 use Thrift\Transport\TSocket;
 
-class GetsAll extends TestCase
+class HbaseGetsAll extends TestCase
 {
+
     public function test1()
     {
         $hbase = new Hbase();
@@ -43,8 +44,6 @@ class GetsAll extends TestCase
             }
         }
 
-        die;
-
         $dummy_attributes = array();
 #
 
@@ -55,11 +54,18 @@ class GetsAll extends TestCase
         try {
             while (true) {
                 print_r($client->scannerGet($scanner));
-                die;
+                if ($i++ > 2)
+                    break;
             }
         } catch (\Exception $e) {
             $client->scannerClose($scanner);
             echo "Scanner finished\n";
         }
+    }
+
+    public function testconfig()
+    {
+        (new Hbase())
+            ->test();
     }
 }
