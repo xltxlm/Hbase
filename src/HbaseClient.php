@@ -15,8 +15,6 @@ use xltxlm\hbase\Config\HbaseConfig;
 
 final class HbaseClient
 {
-    /** @var TBufferedTransport */
-    private $transport;
     /** @var HbaseConfig 服务器定义 */
     protected $HbaseConfig;
 
@@ -36,21 +34,15 @@ final class HbaseClient
     public function setHbaseConfig(HbaseConfig $HbaseConfig)
     {
         $this->HbaseConfig = $HbaseConfig;
-        $socket = new TSocket($this->getHbaseConfig()->getHost(), $this->getHbaseConfig()->getPort());
+        $socket = new TSocket($HbaseConfig->getHost(), $HbaseConfig->getPort());
 
         $socket->setSendTimeout(10000); // Ten seconds (too long for production, but this is just a demo ;)
         $socket->setRecvTimeout(20000); // Twenty seconds
-        $this->transport = new TBufferedTransport($socket);
-        $protocol = new TBinaryProtocol($this->transport);
-        $client = new \Hbase\HbaseClient($protocol);
+        $transport = new TBufferedTransport($socket);
+        $client = new \Hbase\HbaseClient(new TBinaryProtocol($transport));
 
-        $this->transport->open();
+        $transport->open();
 
         return $client;
-    }
-
-    public function __destruct()
-    {
-        $this->transport->close();
     }
 }
