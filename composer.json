@@ -1,0 +1,27 @@
+{
+  "name": "xltxlm/Hbase",
+  "description": "Hbase操作类库",
+  "authors": [
+    {
+      "name": "xltxlm",
+      "email": "xltxlm@qq.com"
+    }
+  ],
+  "require": {
+    "php": ">=7.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "xltxlm\\Hbase\\": [
+        "src/"
+      ]
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "xltxlm\\Hbase\\": [
+        "./"
+      ]
+    }
+  }
+}
