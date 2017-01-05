@@ -33,7 +33,7 @@ final class HbaseClient
      *
      * @return \Hbase\HbaseClient
      */
-    public function setHbaseConfig(HbaseConfig $HbaseConfig): HbaseClient
+    public function setHbaseConfig(HbaseConfig $HbaseConfig)
     {
         $this->HbaseConfig = $HbaseConfig;
         $socket = new TSocket($this->getHbaseConfig()->getHost(), $this->getHbaseConfig()->getPort());
