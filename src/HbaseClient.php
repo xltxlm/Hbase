@@ -31,7 +31,7 @@ final class HbaseClient
     /**
      * @param HbaseConfig $HbaseConfig
      *
-     * @return HbaseClient
+     * @return \Hbase\HbaseClient
      */
     public function setHbaseConfig(HbaseConfig $HbaseConfig): HbaseClient
     {
@@ -42,7 +42,7 @@ final class HbaseClient
         $socket->setRecvTimeout(20000); // Twenty seconds
         $this->transport = new TBufferedTransport($socket);
         $protocol = new TBinaryProtocol($this->transport);
-        $client = new self($protocol);
+        $client = new \Hbase\HbaseClient($protocol);
 
         $this->transport->open();
 
