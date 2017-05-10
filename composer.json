@@ -9,7 +9,7 @@
   ],
   "require": {
     "php": ">=7.0",
-    "xltxlm/thrift": "0.9.3",
+    "xltxlm/thrift": "*",
     "xltxlm/config": "*",
     "xltxlm/Logger": "*"
   },
